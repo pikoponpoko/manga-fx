@@ -48,3 +48,7 @@ Adobe After Effects SDK は同梱していません。[Adobe Developer](https://
 cmake -S plugins/<名前> -B build -DAE_SDK_DIR=<SDK>/Examples
 cmake --build build --config Release
 ```
+
+## ライセンス
+
+[MIT License](LICENSE)
