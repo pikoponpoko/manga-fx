@@ -8,6 +8,20 @@
 | [KZ Aura Contour](plugins/aura/README.md) | オーラ生成 |
 | [KZ InkPool](plugins/ink-pool/README.md) | 墨溜まり |
 | [KZ Iris Kaleidoscope](plugins/iris-kaleidoscope/README.md) | 瞳の万華鏡 |
+| [KZ GrowFill](plugins/grow-fill/README.md) | 塗り広がり |
+| [KZ CastShadow](plugins/cast-shadow/README.md) | 落ち影 |
+| [KZ GooMerge](plugins/goo-merge/README.md) | くっつき合体 |
+| [KZ FlowLoop](plugins/flow-loop/README.md) | 流れるループ |
+
+## スクリプト
+
+| スクリプト | 説明 |
+|---|---|
+| [Number Formatter](scripts/number-formatter/README.md) | 数値・タイマー表示 |
+| [Object Library](scripts/object-library/README.md) | オブジェクト保存 |
+| [Action Runner](scripts/action-runner/README.md) | アクション実行 |
+
+スクリプトは zip の `Scripts/` に入っています。入れ方は各 README を参照してください。
 
 ## ダウンロード
 
