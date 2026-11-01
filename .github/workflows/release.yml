@@ -2,7 +2,9 @@ name: Release
 
 on:
   push:
-    tags: ['v*']
+    branches: [main]
+    paths: ['dist/**']
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -12,8 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - name: Create release
+      - name: Create releases for new versions in dist/
         env:
           GH_TOKEN: ${{ github.token }}
-          TAG: ${{ github.ref_name }}
-        run: gh release create "$TAG" "dist/MangaFX-plugins-$TAG.zip" --title "$TAG" --notes-file "dist/notes-$TAG.md"
+        run: |
+          for z in dist/MangaFX-plugins-v*.zip; do
+            tag=$(basename "$z" .zip); tag=${tag#MangaFX-plugins-}
+            if gh release view "$tag" >/dev/null 2>&1; then continue; fi
+            gh release create "$tag" "$z" --target "$GITHUB_SHA" --title "$tag" --notes-file "dist/notes-$tag.md"
+          done
