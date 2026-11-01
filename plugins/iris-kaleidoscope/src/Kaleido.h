@@ -1,0 +1,156 @@
+// Kaleido.h
+// After Effects glue for the "Iris Kaleidoscope" effect.
+
+#pragma once
+
+#include "AEConfig.h"
+#include "entry.h"
+#include "AE_Effect.h"
+#include "AE_EffectCB.h"
+#include "AE_EffectCBSuites.h"
+#include "AE_EffectSuites.h"
+#include "AE_Macros.h"
+#include "Param_Utils.h"
+
+#define NAME            "Iris Kaleidoscope"
+#define MATCH_NAME      "KZ Iris Kaleidoscope"
+#define CATEGORY        "Manga FX"
+#define DESCRIPTION     "Fills each eye with a turning kaleidoscope of a motif layer, shrinking toward the pupil."
+
+// Keep in sync with AE_Effect_Version in KaleidoPiPL.r (1.0 develop build 1 = 524289).
+#define MAJOR_VERSION   1
+#define MINOR_VERSION   0
+#define BUG_VERSION     0
+#define STAGE_VERSION   PF_Stage_DEVELOP
+#define BUILD_VERSION   1
+
+// Parameter order in the Effect Controls panel.
+enum {
+	KAL_INPUT = 0,
+
+	KAL_MASK_TOPIC,
+	KAL_MASK_MODE,
+	KAL_KEY_COLOR,
+	KAL_KEY_TOLERANCE,
+	KAL_KEY_SOFTNESS,
+	KAL_CHOKE,
+	KAL_FEATHER,
+	KAL_MIN_EYE_SIZE,
+	KAL_MASK_TOPIC_END,
+
+	KAL_CENTER_TOPIC,
+	KAL_CENTER_MODE,
+	KAL_CENTER_POINT,
+	KAL_SHAPE_FIT,
+	KAL_IRIS_SIZE,
+	KAL_PUPIL_SIZE,
+	KAL_CENTER_TOPIC_END,
+
+	KAL_PATTERN_TOPIC,
+	KAL_PATTERN_LAYER,
+	KAL_SHAPE,
+	KAL_COPIES,
+	KAL_RING_SPACING,
+	KAL_COPY_SIZE,
+	KAL_COPY_ROTATION,
+	KAL_MIRROR,
+	KAL_STAGGER,
+	KAL_PATTERN_TOPIC_END,
+
+	KAL_MOTION_TOPIC,
+	KAL_ROTATION,
+	KAL_ROTATION_SPEED,
+	KAL_SWAY_AMOUNT,
+	KAL_SWAY_SPEED,
+	KAL_SWAY_LAG,
+	KAL_TWIST,
+	KAL_FLOW_SPEED,
+	KAL_WAVE_AMOUNT,
+	KAL_WAVE_COUNT,
+	KAL_WAVE_SPEED,
+	KAL_MOTION_TOPIC_END,
+
+	KAL_DEPTH_TOPIC,
+	KAL_DEPTH_FADE,
+	KAL_FADE_COLOR,
+	KAL_BLUR_AMOUNT,
+	KAL_FOCUS_DEPTH,
+	KAL_FOCUS_RANGE,
+	KAL_DEPTH_TOPIC_END,
+
+	KAL_OVERLAY_TOPIC,
+	KAL_OVERLAY_MODE,
+	KAL_OVERLAY_OUTER,
+	KAL_OVERLAY_INNER,
+	KAL_OVERLAY_AMOUNT,
+	KAL_OVERLAY_TOPIC_END,
+
+	KAL_BLEND_MODE,
+	KAL_OPACITY,
+	KAL_COMPOSITE,
+
+	KAL_NUM_PARAMS
+};
+
+// Disk IDs: never renumber these, saved projects refer to them.
+enum {
+	ID_MASK_TOPIC = 1,
+	ID_MASK_MODE,
+	ID_KEY_COLOR,
+	ID_KEY_TOLERANCE,
+	ID_KEY_SOFTNESS,
+	ID_CHOKE,
+	ID_FEATHER,
+	ID_MIN_EYE_SIZE,
+	ID_MASK_TOPIC_END,
+	ID_CENTER_TOPIC,
+	ID_CENTER_MODE,
+	ID_CENTER_POINT,
+	ID_SHAPE_FIT,
+	ID_PUPIL_SIZE,
+	ID_CENTER_TOPIC_END,
+	ID_PATTERN_TOPIC,
+	ID_PATTERN_LAYER,
+	ID_SHAPE,
+	ID_COPIES,
+	ID_RING_SPACING,
+	ID_COPY_SIZE,
+	ID_COPY_ROTATION,
+	ID_MIRROR,
+	ID_STAGGER,
+	ID_PATTERN_TOPIC_END,
+	ID_MOTION_TOPIC,
+	ID_ROTATION,
+	ID_ROTATION_SPEED,
+	ID_SWAY_AMOUNT,
+	ID_SWAY_SPEED,
+	ID_SWAY_LAG,
+	ID_TWIST,
+	ID_FLOW_SPEED,
+	ID_WAVE_AMOUNT,
+	ID_WAVE_COUNT,
+	ID_WAVE_SPEED,
+	ID_MOTION_TOPIC_END,
+	ID_DEPTH_TOPIC,
+	ID_DEPTH_FADE,
+	ID_FADE_COLOR,
+	ID_BLUR_AMOUNT,
+	ID_FOCUS_DEPTH,
+	ID_FOCUS_RANGE,
+	ID_DEPTH_TOPIC_END,
+	ID_OVERLAY_TOPIC,
+	ID_OVERLAY_MODE,
+	ID_OVERLAY_OUTER,
+	ID_OVERLAY_INNER,
+	ID_OVERLAY_AMOUNT,
+	ID_OVERLAY_TOPIC_END,
+	ID_BLEND_MODE,
+	ID_OPACITY,
+	ID_COMPOSITE,
+	ID_IRIS_SIZE
+};
+
+extern "C" {
+DllExport PF_Err EffectMain(PF_Cmd cmd, PF_InData* in_data, PF_OutData* out_data,
+                            PF_ParamDef* params[], PF_LayerDef* output, void* extra);
+}
